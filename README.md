@@ -29,11 +29,11 @@ The semantic content of articles was represented by applying one of four languag
 # Results
 
 <!-- ![Figure 4](figures/figure_04.png) -->
-<img src="figures/figure_04.png" width="90%">
+<img src="figures/figure_04.png" width="80%">
 
 The highest area under the receiver operating characteristic curve (ROC-AUC) in the test set was achieved by averaging GloVe embeddings. Except for LSTM, full texts had superior performance to titles. 
 
-![Figure 5](figures/figure_05.png)
+<!-- ![Figure 5](figures/figure_05.png) -->
 <img src="figures/figure_05.png" width="80%">
 
 The top models had feature maps that captured expected predictive relationships. For instance, the posterior temporal lobe region shown above has a well established role in language processing, and it was strongly predicted by language terms.
