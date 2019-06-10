@@ -1,13 +1,15 @@
 # A computational knowledge engine for human neuroscience
 
-By Ellie Beam, Stanford University, Department of Psychiatry and Behavioral Sciences
-Final project for Deep Learning (CS 230)
+### By Ellie Beam, Stanford University, Department of Psychiatry and Behavioral Sciences
+
+### Final project for Deep Learning (CS 230)
 
 Most mental functions were defined decades ago in psychology before it could be known how they related to brain activity. Here, deep learning is applied to assess how strongly mental functions in human neuroimaging article texts predict spatial locations of brain activity. Several sets of semantic features are compared including term occurrences, embeddings, and context encodings of the titles and full texts. The results support averaging the embeddings of mental function terms in the full text as input for this classification task. Among the top-performing classifiers, feature maps for each brain region lend insight into which mental functions most strongly predict activation across the literature.
 
 # Dataset 
 
-![Figure 2](figures/figure_02.png){:height="70%" width="70%"}
+<!-- ![Figure 2](figures/figure_02.png) -->
+<img src="figures/figure_02.png" width="60%">
 
 ## Text inputs
 
