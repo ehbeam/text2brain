@@ -8,8 +8,7 @@ Most mental functions were defined decades ago in psychology before it could be 
 
 # Dataset 
 
-<!-- ![Figure 2](figures/figure_02.png) -->
-<img src="figures/figure_02.png" width="60%">
+![Figure 2](figures/figure_02.png)
 
 ## Text inputs
 
@@ -30,4 +29,8 @@ The semantic content of articles was represented by applying one of four languag
 ![Figure 4](figures/figure_04.png)
 
 The highest area under the receiver operating characteristic curve (ROC-AUC) in the test set was achieved by averaging GloVe embeddings. Except for LSTM, full texts had superior performance to titles. 
+
+![Figure 5](figures/figure_05.png)
+
+The top models had feature maps that captured expected predictive relationships. For instance, the posterior temporal lobe region shown above has a well established role in language processing, and it was strongly predicted by language terms.
 
