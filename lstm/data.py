@@ -2,6 +2,8 @@ import os
 from io import open
 import torch
 
+# Adapted from https://github.com/pytorch/examples/tree/master/word_language_model
+
 class Dictionary(object):
     def __init__(self):
         self.word2idx = {}

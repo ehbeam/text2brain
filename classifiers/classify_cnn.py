@@ -17,6 +17,10 @@ parser.add_argument('--data', type=str, default='titles',
 args = parser.parse_args()
 data = args.data
 
+if data not in ["titles", "texts"]:
+	raise ValueError("""An invalid option for `--data` was supplied,
+					 options are ['titles', 'texts']""")
+
 
 # Load the GloVe vector space model
 vsm = pd.read_csv("../data/text/glove_gen_n100_win15_min5_iter500_190428.txt", 
@@ -24,13 +28,7 @@ vsm = pd.read_csv("../data/text/glove_gen_n100_win15_min5_iter500_190428.txt",
 n_vocab, n_emb = vsm.shape
 
 # Load the term matrix
-if data == "titles":
-	X = utilities.load_ttm(path="../")
-elif data == "texts":
-	X = utilities.load_dtm(path="../")
-else:
-	raise ValueError("""An invalid option for `--data` was supplied,
-					 options are ['titles', 'texts']""")
+X = utilities.load_doc_term_matrix(path="../", inputs=data)
 X = X[X.columns.intersection(vsm.index)]
 m, n_terms = X.shape
 lexicon = list(X.columns)

@@ -1,5 +1,7 @@
 import torch.nn as nn
 
+# From https://github.com/pytorch/examples/tree/master/word_language_model
+
 class RNNModel(nn.Module):
     """Container module with an encoder, a recurrent module, and a decoder."""
 

@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+# By Ellie Beam (ebeam@stanford.edu)
+
 import argparse
 import data
 import torch

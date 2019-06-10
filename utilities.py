@@ -22,19 +22,19 @@ def load_coordinates(path=""):
 	return activations
 
 
-def doc_mean_thres(df):
-	doc_mean = df.mean()
-	df_bin = 1.0 * (df.values > doc_mean.values)
-	df_bin = pd.DataFrame(df_bin, columns=df.columns, index=df.index)
-	return df_bin
-
-
 def load_lexicon(sources, path=""):
 	lexicon = []
 	for source in sources:
 		file = "{}data/text/lexicon_{}.txt".format(path, source)
 		lexicon += [token.strip() for token in open(file, "r").readlines()]
 	return sorted(lexicon)
+
+
+def doc_mean_thres(df):
+	doc_mean = df.mean()
+	df_bin = 1.0 * (df.values > doc_mean.values)
+	df_bin = pd.DataFrame(df_bin, columns=df.columns, index=df.index)
+	return df_bin
 
 
 def load_doc_term_matrix(version=190325, binarize=True, sources=["cogneuro"], path="", inputs="texts"):
@@ -46,26 +46,6 @@ def load_doc_term_matrix(version=190325, binarize=True, sources=["cogneuro"], pa
 	if binarize:
 		dtm = doc_mean_thres(dtm)
 	return dtm.astype(float)
-
-
-def load_dtm(version=190325, binarize=True, sources=["cogneuro"], path=""):
-	dtm = pd.read_csv("{}data/text/dtm_{}.csv.gz".format(path, version), compression="gzip", index_col=0)
-	lexicon = load_lexicon(sources, path=path)
-	lexicon = sorted(list(set(lexicon).intersection(dtm.columns)))
-	dtm = dtm[lexicon]
-	if binarize:
-		dtm = doc_mean_thres(dtm)
-	return dtm.astype(float)
-
-
-def load_ttm(version=190325, binarize=True, sources=["cogneuro"], path=""):
-	ttm = pd.read_csv("{}data/text/ttm_{}.csv.gz".format(path, version), compression="gzip", index_col=0)
-	lexicon = load_lexicon(sources, path=path)
-	lexicon = sorted(list(set(lexicon).intersection(ttm.columns)))
-	ttm = ttm[lexicon]
-	if binarize:
-		ttm = doc_mean_thres(ttm)
-	return ttm.astype(float)
 
 
 # Function for stemming, conversion to lowercase, and removal of punctuation

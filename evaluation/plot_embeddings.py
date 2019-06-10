@@ -88,22 +88,22 @@ for inp in inputs:
 	fit[inp].load_state_dict(torch.load(net_file))
 
 
-# ##########################################
-# ########### Evaluation metrics ###########
-# ##########################################
+##########################################
+########### Evaluation metrics ###########
+##########################################
 
-# print("Plotting evaluation metrics")
+print("Plotting evaluation metrics")
 
-# for inp in inputs:
+for inp in inputs:
 
-# 	utilities.plot_loss("{}_{}".format(prefix, inp), list(loss[inp]["LOSS"].values), 
-# 						xlab="Epoch", ylab="Loss", alpha=0.65, color=color, print_fig=False)
+	utilities.plot_loss("{}_{}".format(prefix, inp), list(loss[inp]["LOSS"].values), 
+						xlab="Epoch", ylab="Loss", alpha=0.65, color=color, print_fig=False)
 
-# 	for split, pmids in splits.items():
-# 		data_set = neural_network.load_mini_batches(X[inp], Y, splits[split], mini_batch_size=len(splits[split]))
-# 		utilities.report_curves(data_set, fit[inp], "{}_{}_{}".format(prefix, inp, split), color=color, print_fig=False)
-# 		report = utilities.report_metrics("results/eval_{}_{}_3h_{}.txt".format(prefix, inp, split), 
-# 										  data_set, fit[inp], Y.columns)
+	for split, pmids in splits.items():
+		data_set = neural_network.load_mini_batches(X[inp], Y, splits[split], mini_batch_size=len(splits[split]))
+		utilities.report_curves(data_set, fit[inp], "{}_{}_{}".format(prefix, inp, split), color=color, print_fig=False)
+		report = utilities.report_metrics("results/eval_{}_{}_3h_{}.txt".format(prefix, inp, split), 
+										  data_set, fit[inp], Y.columns)
 
 
 ##########################################

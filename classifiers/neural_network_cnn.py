@@ -14,6 +14,7 @@ torch.manual_seed(42)
 import sys
 sys.path.append("..")
 import utilities
+import neural_network
 
 
 # Neural network classifier
@@ -46,18 +47,6 @@ class CNN2Net(nn.Module):
 		x = self.dropout3(F.relu(self.bn3(self.fc3(x))))
 		x = torch.sigmoid(self.fc4(x))
 		return x
-
-
-# Loads list of hyperparameters for a randomized grid search
-def load_hyperparam_grid(n_iter=50):
-
-	from sklearn.model_selection import ParameterSampler
-
-	hyperparam_grid = {"lr": [0.00001, 0.0001, 0.001, 0.01, 0.1, 1.0],
-				  		"weight_decay": [0.00001, 0.0001, 0.001, 0.01, 0.1],
-				  		"n_hid": [25, 50, 75, 100],
-				  		"p_dropout": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]}
-	return list(ParameterSampler(hyperparam_grid, n_iter=n_iter, random_state=42))
 
 
 # Loads list of random mini-batches
@@ -108,20 +97,6 @@ def load_mini_batches(X, Y, split, mini_batch_size=64, seed=42, reshape_labels=F
 	return mini_batches
 
 
-# Converts data from numpy to torch format
-def numpy2torch(data):
-	inputs, labels = data
-	inputs = Variable(torch.from_numpy(inputs.T).float())
-	labels = Variable(torch.from_numpy(labels.T).float())
-	return inputs, labels
-
-
-# Resets classifier weights between optimization steps
-def reset_weights(module):
-	if isinstance(module, nn.Linear):
-		module.reset_parameters()
-
-
 # Optimizes classifier hyperparameters
 def optimize_classifier(X_train, X_dev, suffix="", batch_size=64, n_epochs=50, n_iter=50):
 
@@ -143,12 +118,12 @@ def optimize_classifier(X_train, X_dev, suffix="", batch_size=64, n_epochs=50, n
 	# Load the mini batches
 	train_set = load_mini_batches(X_train, Y, splits["train"], mini_batch_size=batch_size, seed=42)
 	dev_set = load_mini_batches(X_dev, Y, splits["dev"], mini_batch_size=len(splits["dev"]), seed=42)
-	dev_set = numpy2torch(dev_set[0])
+	dev_set = neural_network.numpy2torch(dev_set[0])
 	# inputs_dev, labels_dev = dev_set[0][:,:,500].to(device), dev_set[1][:,500].to(device)
 	inputs_dev, labels_dev = dev_set[0].to(device), dev_set[1].to(device)
 
 	# Specify the randomized hyperparameter grid
-	param_list = load_hyperparam_grid(n_iter=n_iter)
+	param_list = neural_network.load_hyperparam_grid(n_iter=n_iter)
 	criterion = F.binary_cross_entropy
 
 	# Loop through hyperparameter combinations
@@ -164,7 +139,7 @@ def optimize_classifier(X_train, X_dev, suffix="", batch_size=64, n_epochs=50, n
 				  n_hid=params["n_hid"], p_dropout=params["p_dropout"])
 		optimizer = optim.Adam(net.parameters(), lr=params["lr"], 
 							   weight_decay=params["weight_decay"])
-		net.apply(reset_weights)
+		net.apply(neural_network.reset_weights)
 		net.to(device)
 
 		# Loop over the dataset multiple times
@@ -173,7 +148,7 @@ def optimize_classifier(X_train, X_dev, suffix="", batch_size=64, n_epochs=50, n
 			for data in train_set:
 
 				# Get the inputs
-				data = numpy2torch(data)
+				data = neural_network.numpy2torch(data)
 				inputs, labels = data[0].to(device), data[1].to(device)
 				
 				# Zero the parameter gradients

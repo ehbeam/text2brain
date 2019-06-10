@@ -9,4 +9,4 @@
 #SBATCH --mail-user=ebeam@stanford.edu
 
 module load python/3.6 py-pytorch/1.0.0_py36
-srun python3 classify_embeddings_titles.py
+srun python3 classify_embeddings_titles.py --data "titles"
