@@ -21,20 +21,20 @@ Spatial coordinates represent locations in the brain that were found to be stati
 
 # Features & Models
 
-![Figure 3](figures/figure_03.png)
-<img src="figures/figure_02.png" width="80%">
+<!-- ![Figure 3](figures/figure_03.png) -->
+<img src="figures/figure_03.png" width="80%">
 
 The semantic content of articles was represented by applying one of four language models to terms for mental functions in article titles or texts. Language model outputs served as inputs to a neural network classifier predicting whether a coordinate was reported in each structure of a neuroanatomical atlas.
 
 # Results
 
 <!-- ![Figure 4](figures/figure_04.png) -->
-<img src="figures/figure_02.png" width="90%">
+<img src="figures/figure_04.png" width="90%">
 
 The highest area under the receiver operating characteristic curve (ROC-AUC) in the test set was achieved by averaging GloVe embeddings. Except for LSTM, full texts had superior performance to titles. 
 
 ![Figure 5](figures/figure_05.png)
-<img src="figures/figure_02.png" width="80%">
+<img src="figures/figure_05.png" width="80%">
 
 The top models had feature maps that captured expected predictive relationships. For instance, the posterior temporal lobe region shown above has a well established role in language processing, and it was strongly predicted by language terms.
 
