@@ -20,6 +20,7 @@ Studies were combined from BrainMap, Neurosynth, and accessible journals. Either
 Spatial coordinates represent locations in the brain that were found to be statistically related to mental function by fMRI or PET imaging. Coordinates reported in Talairach space were converted to MNI, then mapped to a whole-brain neuroanatomical atlas. 
 
 <br/>
+
 # Features & Models
 
 <!-- ![Figure 3](figures/figure_03.png) -->
@@ -28,6 +29,7 @@ Spatial coordinates represent locations in the brain that were found to be stati
 The semantic content of articles was represented by applying one of four language models to terms for mental functions in article titles or texts. Language model outputs served as inputs to a neural network classifier predicting whether a coordinate was reported in each structure of a neuroanatomical atlas.
 
 <br/>
+
 # Results
 
 <!-- ![Figure 4](figures/figure_04.png) -->
